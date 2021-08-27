@@ -1,0 +1,43 @@
+<h1 class="text-center"> Create new tournament </h1>
+
+
+<div class="container">
+  <div class="alert alert-warning"
+      *ngIf="tournamentForm.dirty && name.invalid">Enter atleast 5 characters as the name of the tournament
+  </div>
+  <div class="alert alert-warning"
+       *ngIf="tournamentPlayers.length < 4 ">Select at least 4 players into the tournament
+  </div>
+
+<form (ngSubmit)="!tournamentForm.invalid && saveTournament()" #tournamentForm="ngForm">
+  <fieldset class="form-group">
+    <label>Tournament name</label>
+    <input type="text" #name="ngModel"
+           [(ngModel)]="tournament.name" class="form-control"
+           name="name" required="required" minlength="5">
+  </fieldset>
+
+  <button type="submit" class="btn btn-success">Save</button>
+</form>
+
+  <div class="row align-items-center">
+    <div class="col text-center">
+      <app-tournament-creator [players] = allPlayers #source></app-tournament-creator>
+    </div>
+    <div class="col-2  ">
+      <button class=""(click)="moveToDestination()" class="btn btn-success">Move -></button>
+      <br> <br>
+      <button (click)="moveBackToSource()" class="btn btn-success">
+        <i class="bi bi-arrow-left"></i>
+        Move back
+      </button>
+
+    </div>
+    <div class="col text-center">
+      <app-tournament-creator [players] = tournamentPlayers #destination></app-tournament-creator>
+    </div>
+
+  </div>
+</div>
+
+

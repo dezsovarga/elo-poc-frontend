@@ -1,0 +1,37 @@
+<div>
+  <button (click)="generateMatchRound()" class="btn btn-success">Generate match round</button>
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th> </th>
+    <th style="text-align: right">Home team</th>
+    <th style="text-align: center"> Score</th>
+    <th style="text-align: left">Away team</th>
+    <th> </th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <!--   for (Todo todo: todos) {  -->
+  <tr *ngFor="let match of playMatchList">
+    <td class="col-md-2"> </td>
+
+    <td class="col-md-3" style="text-align: right">{{match.player1.name }} ({{match.player1.elo}})</td>
+    <td class="col-md-1" style="text-align: center">{{match.score1}} - {{match.score2 }}</td>
+    <td class="col-md-3" style="text-align: left">{{match.player2.name }} ({{match.player2.elo}})</td>
+    <td class="col-md-2"> </td>
+  </tr>
+  <!-- } -->
+  </tbody>
+
+</table>
+
+<div>
+<!--  <button (click)="playMatches()" class="btn btn-success">Get scores</button>-->
+  <br> <br>
+  <button (click)="saveNewRatings()" class="btn btn-success">Save ratings</button>
+
+</div>
+
