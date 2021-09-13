@@ -3,17 +3,8 @@ import {Player} from "../player-list/player-list.component";
 import {PlayersService} from "../service/data/players.service";
 import {TournamentCreatorComponent} from "./tournament-creator/tournament-creator.component";
 import {TournamentService} from "../service/data/tournament.service";
+import {Tournament} from "../model/Tournament";
 
-
-export class Tournament {
-  constructor(
-    public name: string,
-    public type: string,
-    public players: Player[]
-  ) {
-
-  }
-}
 @Component({
   selector: 'app-create-tournament',
   templateUrl: './create-tournament.component.html',
@@ -23,9 +14,7 @@ export class CreateTournamentComponent implements OnInit {
 
   allPlayers: Player[];
   tournamentPlayers: Player[];
-  tournament: Tournament;
-  // @ViewChild(TournamentCreatorComponent) allPlayersComp: TournamentCreatorComponent | undefined;
-  // @ViewChild(TournamentCreatorComponent) tourPlayersComp: TournamentCreatorComponent | undefined;
+  tournament :Tournament=<Tournament>{};
 
   @ViewChild("source", { static: false }) allPlayersComp: TournamentCreatorComponent | undefined;
   @ViewChild("destination", { static: false }) tourPlayersComp: TournamentCreatorComponent | undefined;
@@ -33,7 +22,6 @@ export class CreateTournamentComponent implements OnInit {
   constructor(private playerService:PlayersService, private tournamentService:TournamentService) {
     this.allPlayers = [];
     this.tournamentPlayers = [];
-    this.tournament = new Tournament("Tournament name", "league", this.tournamentPlayers);
   }
 
   ngOnInit(): void {
@@ -65,6 +53,7 @@ export class CreateTournamentComponent implements OnInit {
 
   saveTournament() {
     console.log(this.tournament);
+    this.tournament.players = this.tournamentPlayers;
     this.tournamentService.saveTournament(this.tournament).subscribe(
       response => {
         console.log(response);

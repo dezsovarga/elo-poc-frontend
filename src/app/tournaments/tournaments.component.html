@@ -1,1 +1,20 @@
-<p>tournaments works!</p>
+<h1 class="text-center"> Tournaments </h1>
+
+<div class="container-sm w-75">
+  <table class="table table-striped table-sm">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Tournament name</th>
+      <th>Tournament type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tournament of tournaments; index as i" (click)="showTournament(tournament.id)">
+      <td>{{i+1}}</td>
+      <td>{{tournament.name }}</td>
+      <td>{{tournament.type}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

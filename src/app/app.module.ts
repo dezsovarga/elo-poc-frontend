@@ -12,6 +12,8 @@ import { CreateTournamentComponent } from './create-tournament/create-tournament
 import { RatingsComponent } from './ratings/ratings.component';
 import { TournamentCreatorComponent } from './create-tournament/tournament-creator/tournament-creator.component';
 import { TournamentsComponent } from './tournaments/tournaments.component';
+import { TournamentComponent } from './tournament/tournament.component';
+import { LeagueRoundComponent } from './tournament/league-round/league-round.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { TournamentsComponent } from './tournaments/tournaments.component';
     CreateTournamentComponent,
     RatingsComponent,
     TournamentCreatorComponent,
-    TournamentsComponent
+    TournamentsComponent,
+    TournamentComponent,
+    LeagueRoundComponent
   ],
   imports: [
     BrowserModule,
