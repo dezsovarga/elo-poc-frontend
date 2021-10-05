@@ -1,0 +1,16 @@
+.player-picker {
+  padding: 3px 15px;
+  margin: 3px;
+  background: darkgray;
+  /*border-style: solid;*/
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+.player-picker-plus {
+  text-align: end;
+}
+
+.checked-player {
+  background: blanchedalmond;
+}

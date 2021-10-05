@@ -1,0 +1,18 @@
+<div>Pot {{pot.potNumber}}</div>
+<div class="row" *ngFor="let playerWithCheckbox of pot.playersWithCheckbox">
+  <div class="col-12">
+    <div class="player-picker"
+         [ngClass]="{'checked-player': playerWithCheckbox.checked}"
+         (click)="addPlayerToTournament(playerWithCheckbox.player.id)">
+      <div class="row">
+        <div class="col-10">
+          {{playerWithCheckbox.player.name}} - {{playerWithCheckbox.player.elo}}
+        </div>
+        <div class="col-2">
+          <em *ngIf="playerWithCheckbox.checked" class="bi bi-check-circle-fill"></em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
