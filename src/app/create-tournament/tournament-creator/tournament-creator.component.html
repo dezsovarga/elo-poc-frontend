@@ -1,16 +1,7 @@
-<table class="table table-sm" table-bordered>
-  <thead>
-  <tr>
-    <th>Player name</th>
-    <th>Rating</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let player of players; let i = index" (click)="clickedRow(i)" [class.active]="i == highlightedRow">
-    <td>{{player.id }}</td>
-    <td>{{player.name }}</td>
-    <td>{{player.elo}}</td>
-  </tr>
-  </tbody>
+<div class="row" >
+  <div class="col-3" *ngFor="let pot of pots | paginate: { itemsPerPage: pagination.pageSize, currentPage: pagination.pageNumber, id: creatorId} ">
+    <app-tournament-pot [pot] = pot></app-tournament-pot>
+  </div>
 
-</table>
+</div>
+<pagination-controls  (pageChange)="pagination.pageNumber = $event" [id] = creatorId></pagination-controls>

@@ -15,26 +15,19 @@
     <input type="text" #name="ngModel"
            [(ngModel)]="tournament.name" class="form-control"
            name="name" required="required" minlength="5">
+    <label>Tournament type</label>
+    <select class="form-control form-select" placeholder="Location">
+      <option value="" disabled>tournament type-</option>
+      <option *ngFor="let tournamentType of tournamentTypes" [ngValue]="tournamentType">{{ tournamentType}}</option>
+    </select>
   </fieldset>
 
   <button type="submit" class="btn btn-success">Save</button>
 </form>
 
   <div class="row align-items-center">
-    <div class="col text-center">
-      <app-tournament-creator [players] = allPlayers #source></app-tournament-creator>
-    </div>
-    <div class="col-2  ">
-      <button class=""(click)="moveToDestination()" class="btn btn-success">Move -></button>
-      <br> <br>
-      <button (click)="moveBackToSource()" class="btn btn-success">
-        <i class="bi bi-arrow-left"></i>
-        Move back
-      </button>
-
-    </div>
-    <div class="col text-center">
-      <app-tournament-creator [players] = tournamentPlayers #destination></app-tournament-creator>
+    <div class="col-12 text-center">
+      <app-tournament-creator [pots] = pots [creatorId] = pagination1 #source></app-tournament-creator>
     </div>
 
   </div>

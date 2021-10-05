@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Player} from "../../player-list/player-list.component";
+import {Pagination} from "../../model/Pagination";
+import {PlayersService} from "../../service/data/players.service";
+import {Pot} from "../../model/Pot";
 
 @Component({
   selector: 'app-tournament-creator',
@@ -8,16 +10,21 @@ import {Player} from "../../player-list/player-list.component";
 })
 export class TournamentCreatorComponent implements OnInit {
 
-  highlightedRow = 1;
-  @Input() players: Player[] | undefined;
+  @Input() pots: Pot[] = [];
+  @Input() creatorId: string = '';
 
-  constructor() { }
+  pagination: Pagination = {
+    pageNumber: 1,
+    pageSize: 4,
+  };
+
+  constructor(private playerService:PlayersService) { }
 
   ngOnInit(): void {
+
   }
 
-  clickedRow(i: number) {
-    console.log(i);
-    this.highlightedRow = i;
+  removePlayerFromTournament(id: number) {
+
   }
 }

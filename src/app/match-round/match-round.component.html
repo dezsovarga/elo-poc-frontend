@@ -15,7 +15,8 @@
   </thead>
   <tbody>
   <!--   for (Todo todo: todos) {  -->
-  <tr *ngFor="let match of playMatchList">
+  <tr *ngFor="let match of playMatchList"
+      [ngClass]="{'highlighted-player': match.player1.name === 'Hungary' || match.player2.name === 'Hungary'}">
     <td class="col-md-2"> </td>
 
     <td class="col-md-3" style="text-align: right">{{match.player1.name }} ({{match.player1.elo}})</td>

@@ -1,9 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Player} from "../player-list/player-list.component";
 import {PlayersService} from "../service/data/players.service";
-import {TournamentCreatorComponent} from "./tournament-creator/tournament-creator.component";
 import {TournamentService} from "../service/data/tournament.service";
 import {Tournament} from "../model/Tournament";
+import {Pot} from "../model/Pot";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-tournament',
@@ -15,11 +16,13 @@ export class CreateTournamentComponent implements OnInit {
   allPlayers: Player[];
   tournamentPlayers: Player[];
   tournament :Tournament=<Tournament>{};
+  tournamentTypes: string[] = ['league', 'knock-out', 'league/knockout'];
+  potSize: number = 8;
+  pagination1 = 'pag1';
+  pagination2 = 'pag2';
+  pots: Pot[] = [];
 
-  @ViewChild("source", { static: false }) allPlayersComp: TournamentCreatorComponent | undefined;
-  @ViewChild("destination", { static: false }) tourPlayersComp: TournamentCreatorComponent | undefined;
-
-  constructor(private playerService:PlayersService, private tournamentService:TournamentService) {
+  constructor(private playerService:PlayersService, private tournamentService:TournamentService, private router: Router,) {
     this.allPlayers = [];
     this.tournamentPlayers = [];
   }
@@ -29,26 +32,34 @@ export class CreateTournamentComponent implements OnInit {
       response => {
         console.log(response);
         this.allPlayers = response;
+        this.sortIntoPots(this.allPlayers);
+        console.log(this.pots);
       }
-    )
+    );
+    this.playerService.addPlayerClicked.subscribe( response => {
+      let playerWithCheckbox = this.playerService.getPlayerByIdFromPots(response.playerId, this.pots);
+      if (playerWithCheckbox){
+        this.tournamentPlayers.push(playerWithCheckbox.player);
+      }
+    });
+    this.playerService.removePlayerClicked.subscribe( response => {
+      let playerWithCheckbox = this.playerService.getPlayerByIdFromPots(response.playerId, this.pots);
+      if (playerWithCheckbox){
+        const index = this.tournamentPlayers.indexOf(playerWithCheckbox.player, 0);
+        this.tournamentPlayers.splice(index, 1);
+      }
+    })
   }
 
-  moveToDestination() {
-    // @ts-ignore
-    let index = this.allPlayersComp.highlightedRow;
-    this.tournamentPlayers.push(this.allPlayers[index]);
-    // @ts-ignore
-    this.allPlayers.splice(this.allPlayersComp.highlightedRow, 1);
-
-  }
-
-  moveBackToSource() {
-    // @ts-ignore
-    let index = this.tourPlayersComp.highlightedRow;
-    // @ts-ignore
-    this.allPlayers.push(this.tournamentPlayers[index]);
-    // @ts-ignore
-    this.tournamentPlayers.splice(index, 1);
+  sortIntoPots(players: Player[]) {
+    const iterate = players.length / this.potSize;
+    let playersCb = players.map(player => {
+      return {player: player, checked: false}
+    });
+    for (let i=1; i<=iterate; i++) {
+      let pot = {playersWithCheckbox : this.playerService.getPot(playersCb, i, this.potSize), potNumber: i}
+      this.pots.push(pot);
+    }
   }
 
   saveTournament() {
@@ -56,7 +67,7 @@ export class CreateTournamentComponent implements OnInit {
     this.tournament.players = this.tournamentPlayers;
     this.tournamentService.saveTournament(this.tournament).subscribe(
       response => {
-        console.log(response);
+        this.router.navigateByUrl('/tournaments');
       }
     )
   }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import { TournamentCreatorComponent } from './create-tournament/tournament-creat
 import { TournamentsComponent } from './tournaments/tournaments.component';
 import { TournamentComponent } from './tournament/tournament.component';
 import { LeagueRoundComponent } from './tournament/league-round/league-round.component';
+import { TournamentPotComponent } from './create-tournament/tournament-pot/tournament-pot.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -27,13 +29,16 @@ import { LeagueRoundComponent } from './tournament/league-round/league-round.com
     TournamentCreatorComponent,
     TournamentsComponent,
     TournamentComponent,
-    LeagueRoundComponent
+    LeagueRoundComponent,
+    TournamentPotComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [PlayerListComponent],
   bootstrap: [AppComponent]
