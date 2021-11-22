@@ -1,31 +1,34 @@
 <h1 class="text-center"> {{leagueTournament.name}}</h1>
 
-<div class="container-sm w-75 grid-striped" >
-  <div class="row">
-    <div class="col-1"> # </div>
-    <div class="col-4"> Name </div>
-    <div class="col-1"> P </div>
-    <div class="col-1"> W </div>
-    <div class="col-1"> D </div>
-    <div class="col-1"> L </div>
-    <div class="col-1"> F </div>
-    <div class="col-1"> A </div>
-    <div class="col-1"> Pts </div>
-  </div>
-  <div *ngFor="let standing of leagueTournament.standings; index as i" class="row">
-    <div class="col-1"> {{i+1}} </div>
-    <div class="col-4"> {{standing.player.name}} ({{standing.player.elo}}) </div>
-    <div class="col-1"> {{standing.playedGames}} </div>
-    <div class="col-1"> {{standing.wins}} </div>
-    <div class="col-1"> {{standing.draws}} </div>
-    <div class="col-1"> {{standing.losses}} </div>
-    <div class="col-1"> {{standing.goalsFor}} </div>
-    <div class="col-1"> {{standing.goalsAgainst}} </div>
-    <div class="col-1"> {{standing.points}} </div>
+<div *ngIf="!loading" class="container-sm w-75 grid-striped" >
+  <div *ngIf="showStandings">
+    <div class="row">
+      <div class="col-1"> # </div>
+      <div class="col-4"> Name </div>
+      <div class="col-1"> P </div>
+      <div class="col-1"> W </div>
+      <div class="col-1"> D </div>
+      <div class="col-1"> L </div>
+      <div class="col-1"> F </div>
+      <div class="col-1"> A </div>
+      <div class="col-1"> Pts </div>
+    </div>
+    <div *ngFor="let standing of leagueTournament.groups[0].standings; index as i" class="row">
+      <div class="col-1"> {{i+1}} </div>
+      <div class="col-4"> {{standing.player.name}} ({{standing.player.elo}}) </div>
+      <div class="col-1"> {{standing.playedGames}} </div>
+      <div class="col-1"> {{standing.wins}} </div>
+      <div class="col-1"> {{standing.draws}} </div>
+      <div class="col-1"> {{standing.losses}} </div>
+      <div class="col-1"> {{standing.goalsFor}} </div>
+      <div class="col-1"> {{standing.goalsAgainst}} </div>
+      <div class="col-1"> {{standing.points}} </div>
 
+    </div>
   </div>
 
-  <app-league-round [matches]="leagueTournament.matches" [numberOfPlayers]="leagueTournament.standings.length"></app-league-round>
+
+  <app-league-round [rounds]="rounds"></app-league-round>
 
   <div class="row">
     <div class="col-4">
@@ -36,8 +39,4 @@
     </div>
   </div>
 
-
-
 </div>
-
-

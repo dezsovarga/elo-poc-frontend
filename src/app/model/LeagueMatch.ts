@@ -6,7 +6,8 @@ export class LeagueMatch {
     public player2: Player,
     public score1: number,
     public score2: number,
-    public roundNumber: number
+    public roundNumber: number,
+    public penaltyWinner: Player
   ) {
 
   }

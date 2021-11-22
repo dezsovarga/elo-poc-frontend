@@ -21,6 +21,9 @@ export class CreateTournamentComponent implements OnInit {
   pagination1 = 'pag1';
   pagination2 = 'pag2';
   pots: Pot[] = [];
+  numberOfPlayersOptions: number[] = [8, 16, 32];
+  selectedNumberOfPlayers: number = 0;
+
 
   constructor(private playerService:PlayersService, private tournamentService:TournamentService, private router: Router,) {
     this.allPlayers = [];
@@ -63,12 +66,17 @@ export class CreateTournamentComponent implements OnInit {
   }
 
   saveTournament() {
-    console.log(this.tournament);
     this.tournament.players = this.tournamentPlayers;
+    console.log(this.tournament);
+
     this.tournamentService.saveTournament(this.tournament).subscribe(
       response => {
         this.router.navigateByUrl('/tournaments');
       }
     )
   }
+
+  // updateSelectedTournamentType() {
+  //   this.selectedTournamentType =
+  // }
 }

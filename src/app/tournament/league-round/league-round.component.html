@@ -1,12 +1,18 @@
 <div class="league-round">
-  <div *ngFor="let leagueMatch of matches; index as i" class="row">
-    <h3 *ngIf="i % (numberOfPlayers/2) == 0" class="text-center"> Round {{leagueMatch.roundNumber}}</h3>
-    <div class="col-4"> {{leagueMatch.player1.name}} </div>
-    <div class="col-4">
-      <div *ngIf="leagueMatch.score1 > -1"> {{leagueMatch.score1}} - {{leagueMatch.score2}} </div>
-    </div>
-    <div class="col-4"> {{leagueMatch.player2.name}} </div>
+  <div *ngFor="let round of rounds; index as i" class="row">
+    <h3 class="text-center"> Round {{round.roundNumber}}</h3>
+    <div *ngFor="let leagueMatch of round.matches; " class="row">
+      <div class="col-4"> {{leagueMatch.player1.name}} </div>
+      <div class="col-4">
+        <div *ngIf="leagueMatch.score1 > -1">
+          {{leagueMatch.score1}} - {{leagueMatch.score2}}
+          <span *ngIf="leagueMatch.penaltyWinner"> ({{leagueMatch.penaltyWinner.name}})  </span>
 
+        </div>
+
+      </div>
+      <div class="col-4"> {{leagueMatch.player2.name}} </div>
+    </div>
   </div>
 
 </div>

@@ -2,9 +2,9 @@
 
 
 <div class="container">
-  <div class="alert alert-warning"
-      *ngIf="tournamentForm.dirty && name.invalid">Enter atleast 5 characters as the name of the tournament
-  </div>
+<!--  <div class="alert alert-warning"-->
+<!--      *ngIf="tournamentForm.dirty && name.invalid">Enter at least 5 characters as the name of the tournament-->
+<!--  </div>-->
   <div class="alert alert-warning"
        *ngIf="tournamentPlayers.length < 4 ">Select at least 4 players into the tournament
   </div>
@@ -16,18 +16,27 @@
            [(ngModel)]="tournament.name" class="form-control"
            name="name" required="required" minlength="5">
     <label>Tournament type</label>
-    <select class="form-control form-select" placeholder="Location">
+    <select class="form-control form-select" [(ngModel)]="tournament.type" name="type">
       <option value="" disabled>tournament type-</option>
-      <option *ngFor="let tournamentType of tournamentTypes" [ngValue]="tournamentType">{{ tournamentType}}</option>
+      <option *ngFor="let tournamentType of tournamentTypes" [ngValue]="tournamentType">{{ tournamentType }}</option>
     </select>
+
+    <div *ngIf="tournament.type === 'league/knockout'">
+      <label>Number of players</label>
+      <select class="form-control form-select" [(ngModel)]="selectedNumberOfPlayers" name="type">
+        <option value="" disabled>number of players-</option>
+        <option *ngFor="let number of numberOfPlayersOptions" [ngValue]="number">{{ number }}</option>
+      </select>
+    </div>
+
   </fieldset>
 
-  <button type="submit" class="btn btn-success">Save</button>
+  <button type="submit" class="btn btn-success" >Save</button>
 </form>
 
   <div class="row align-items-center">
     <div class="col-12 text-center">
-      <app-tournament-creator [pots] = pots [creatorId] = pagination1 #source></app-tournament-creator>
+      <app-tournament-creator [pots] = pots [creatorId] = pagination1></app-tournament-creator>
     </div>
 
   </div>

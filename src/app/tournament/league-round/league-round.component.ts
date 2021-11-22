@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LeagueMatch} from "../../model/LeagueMatch";
+import {MatchRound} from "../../model/MatchRound";
 
 @Component({
   selector: 'app-league-round',
@@ -9,8 +10,7 @@ import {LeagueMatch} from "../../model/LeagueMatch";
 export class LeagueRoundComponent implements OnInit {
 
   roundNumber = 0;
-  @Input('matches') matches : LeagueMatch[] = <LeagueMatch[]>{};
-  @Input('numberOfPlayers') numberOfPlayers : number = 0;
+  @Input('rounds') rounds : MatchRound[] = <MatchRound[]>{};
 
 
   constructor() { }
