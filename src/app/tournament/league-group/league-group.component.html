@@ -1,0 +1,29 @@
+<h4 class="text-center"> {{groupName}}</h4>
+
+<div *ngIf="showStandings">
+  <div class="row">
+    <div class="col-1"> # </div>
+    <div class="col-4"> Name </div>
+    <div class="col-1"> P </div>
+    <div class="col-1"> W </div>
+    <div class="col-1"> D </div>
+    <div class="col-1"> L </div>
+    <div class="col-1"> F </div>
+    <div class="col-1"> A </div>
+    <div class="col-1"> Pts </div>
+  </div>
+  <div *ngFor="let standing of leagueTournament.groups[groupNumber].standings; index as i" class="row">
+    <div class="col-1"> {{i+1}} </div>
+    <div class="col-4"> {{standing.player.name}} ({{standing.player.elo}}) </div>
+    <div class="col-1"> {{standing.playedGames}} </div>
+    <div class="col-1"> {{standing.wins}} </div>
+    <div class="col-1"> {{standing.draws}} </div>
+    <div class="col-1"> {{standing.losses}} </div>
+    <div class="col-1"> {{standing.goalsFor}} </div>
+    <div class="col-1"> {{standing.goalsAgainst}} </div>
+    <div class="col-1"> {{standing.points}} </div>
+
+  </div>
+</div>
+
+<app-league-round [rounds]="groupRounds[groupNumber]"></app-league-round>

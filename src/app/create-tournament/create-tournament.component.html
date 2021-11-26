@@ -21,7 +21,7 @@
       <option *ngFor="let tournamentType of tournamentTypes" [ngValue]="tournamentType">{{ tournamentType }}</option>
     </select>
 
-    <div *ngIf="tournament.type === 'league/knockout'">
+    <div *ngIf="tournament.type === 'league/knock-out'">
       <label>Number of players</label>
       <select class="form-control form-select" [(ngModel)]="selectedNumberOfPlayers" name="type">
         <option value="" disabled>number of players-</option>

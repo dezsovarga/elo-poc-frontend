@@ -16,7 +16,7 @@ export class CreateTournamentComponent implements OnInit {
   allPlayers: Player[];
   tournamentPlayers: Player[];
   tournament :Tournament=<Tournament>{};
-  tournamentTypes: string[] = ['league', 'knock-out', 'league/knockout'];
+  tournamentTypes: string[] = ['league', 'knock-out', 'league/knock-out'];
   potSize: number = 8;
   pagination1 = 'pag1';
   pagination2 = 'pag2';

@@ -16,6 +16,7 @@ import { TournamentComponent } from './tournament/tournament.component';
 import { LeagueRoundComponent } from './tournament/league-round/league-round.component';
 import { TournamentPotComponent } from './create-tournament/tournament-pot/tournament-pot.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { LeagueGroupComponent } from './tournament/league-group/league-group.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {NgxPaginationModule} from "ngx-pagination";
     TournamentsComponent,
     TournamentComponent,
     LeagueRoundComponent,
-    TournamentPotComponent
+    TournamentPotComponent,
+    LeagueGroupComponent
   ],
   imports: [
     BrowserModule,
