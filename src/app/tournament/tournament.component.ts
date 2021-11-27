@@ -130,5 +130,11 @@ export class TournamentComponent implements OnInit {
 
   switchGroup(groupNumber: number) {
     this.groupNumber = groupNumber;
+    if (this.groupNumber === this.leagueTournament.groups.length) {
+      this.showStandings = false;
+    }
+    else {
+      this.showStandings = true;
+    }
   }
 }
